@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
+
+	<grid model="com.axelor.apps.admission.db.AdmissionProcess" title="Admisssion Process" name="admission-process-grid">
+		<field name="name" />
+		<field name="fromDate" />
+		<field name="toDate" />
+	</grid>
+
+	<form model="com.axelor.apps.admission.db.AdmissionProcess" title="Admission Process" name="admission-process-form">
+		<panel colSpan="12">
+			<field name="name" colSpan="12" />
+			<field name="fromDate" colSpan="6" />
+			<field name="toDate" colSpan="6" />
+		</panel>
+		<panel name="actionsPanel" sidebar="true">
+			<button name="completeAdmissionBtn" title="Complete Admission" onClick="action-admission-method-confirm-onclick" />
+		</panel>
+	</form>
+
+	<action-method name="action-admission-method-confirm-onclick">
+		<call class="com.axelor.apps.admission.web.AdmissionProcessController" method="checkAllAdmissionEntries" />
+	</action-method>
+
+</object-views>
