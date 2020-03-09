@@ -22,7 +22,7 @@
 				<field name="registrationDate" />
 				<field name="faculty" />
 				<field name="merit" />
-				<field name="collegeEntryList" colSpan="12" />
+				<field name="collegeEntryList" colSpan="12" form-view="college-entry-form" grid-view="college-entry-grid"/>
 				<field name="validationDate" />
 				<field name="collegeSelected" />
 			</panel>

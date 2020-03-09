@@ -8,8 +8,10 @@
 	</grid>
 
 	<form model="com.axelor.apps.admission.db.CollegeEntry" title="College Entry" name="college-entry-form">
-		<field name="college" />
-		<field name="sequence" />
+		<panel>
+			<field name="college" />
+			<field name="sequence" />
+		</panel>
 	</form>
 
 </object-views>

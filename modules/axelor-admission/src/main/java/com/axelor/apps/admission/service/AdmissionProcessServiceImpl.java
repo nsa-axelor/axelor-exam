@@ -1,34 +1,36 @@
 package com.axelor.apps.admission.service;
 
-import com.axelor.apps.admission.db.AdmissionEntry;
-import com.axelor.apps.admission.db.AdmissionProcess;
-import com.axelor.apps.admission.db.College;
-import com.axelor.apps.admission.db.CollegeEntry;
-import com.axelor.apps.admission.db.repo.AdmissionEntryRepository;
-import com.axelor.apps.admission.db.repo.FacultyEntryRepository;
-import com.google.inject.Inject;
-import com.google.inject.persist.Transactional;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
 import org.apache.commons.lang3.builder.CompareToBuilder;
+
+import com.axelor.apps.admission.db.AdmissionEntry;
+import com.axelor.apps.admission.db.AdmissionProcess;
+import com.axelor.apps.admission.db.College;
+import com.axelor.apps.admission.db.CollegeEntry;
+import com.axelor.apps.admission.db.FacultyEntry;
+import com.axelor.apps.admission.db.repo.AdmissionEntryRepository;
+import com.axelor.apps.admission.db.repo.FacultyEntryRepository;
+import com.axelor.inject.Beans;
+import com.google.inject.persist.Transactional;
 
 public class AdmissionProcessServiceImpl implements AdmissionProcessService {
 
-	@Inject
-	AdmissionEntryRepository admissionEntryRepository;
+//	@Inject
+//	AdmissionEntryRepository admissionEntryRepository;
 
-	@Inject
-	FacultyEntryRepository facultyEntryRepository;
+//	@Inject
+//	FacultyEntryRepository facultyEntryRepository;
 
 	boolean isCollegeSelected = false;
 
-	@Transactional
 	@Override
 	public void setAllAdmissions(AdmissionProcess admissionProcess) {
 
-		List<AdmissionEntry> admissionEntries = admissionEntryRepository.all()
+		List<AdmissionEntry> admissionEntries = Beans.get(AdmissionEntryRepository.class).all()
 				.filter("self.registrationDate > :fromDate AND self.registrationDate < :toDate")
 				.bind("fromDate", admissionProcess.getFromDate()).bind("toDate", admissionProcess.getToDate()).fetch();
 
@@ -62,7 +64,8 @@ public class AdmissionProcessServiceImpl implements AdmissionProcessService {
 							int cnt = facultyEntry.getSeats();
 							cnt--;
 							facultyEntry.setSeats(cnt);
-							facultyEntryRepository.save(facultyEntry);
+							this.saveFacultyEntry(facultyEntry);
+//							facultyEntryRepository.save(facultyEntry);
 						}
 						entry.setValidationDate(LocalDate.now());
 						entry.setStatusSelect(AdmissionEntryRepository.STATUS_ADMITTED);
@@ -76,8 +79,21 @@ public class AdmissionProcessServiceImpl implements AdmissionProcessService {
 					}
 				});
 			});
-			admissionEntryRepository.save(entry);
+			this.saveAdmissionEntry(entry);
+//			admissionEntryRepository.save(entry);
 			isCollegeSelected = false;
 		});
 	}
+	
+	@Transactional
+	public void saveAdmissionEntry(AdmissionEntry admissionEntry) {
+		Beans.get(AdmissionEntryRepository.class).save(admissionEntry);
+	}
+	
+	@Transactional
+	public void saveFacultyEntry(FacultyEntry facultyEntry) {
+		Beans.get(FacultyEntryRepository.class).save(facultyEntry);
+	}
+	
+	
 }
