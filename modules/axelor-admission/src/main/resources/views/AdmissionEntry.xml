@@ -27,9 +27,8 @@
         <field name="collegeSelected" />
       </panel>
     </panel>
-    <panel name="actionsPanel" sidebar="true">
+    <panel name="actionsPanel" sidebar="true" showIf="statusSelect != 3">
       <button name="confirmBtn" title="Confirm" showIf="statusSelect == 1" onClick="action-admission-group-confirm-onclick" />
-      <button name="admitBtn" title="Admit" showIf="statusSelect == 2" onClick="action-admission-group-admit-onclick" readonly="true" />
       <button name="cancelBtn" title="Cancel" showIf="statusSelect == 2" onClick="action-admission-group-cancel-onclick" />
       <button name="draftBtn" title="Draft" showIf="statusSelect == 4" onClick="action-admission-group-draft-onclick" />
     </panel>
@@ -37,11 +36,6 @@
 
   <action-group name="action-admission-group-confirm-onclick">
     <action name="action-admission-record-confirm-onclick" />
-    <action name="save" />
-  </action-group>
-
-  <action-group name="action-admission-group-admit-onclick">
-    <action name="action-admission-record-admit-onclick" />
     <action name="save" />
   </action-group>
 
@@ -57,11 +51,6 @@
 
   <action-record name="action-admission-record-confirm-onclick" model="com.axelor.apps.admission.db.AdmissionEntry">
     <field name="statusSelect" expr="2" />
-  </action-record>
-
-  <action-record name="action-admission-record-admit-onclick" model="com.axelor.apps.admission.db.AdmissionEntry">
-    <field name="statusSelect" expr="3" />
-    <field name="validationDate" expr="eval: __date__" />
   </action-record>
 
   <action-record name="action-admission-record-cancel-onclick" model="com.axelor.apps.admission.db.AdmissionEntry">
