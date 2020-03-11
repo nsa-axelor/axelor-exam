@@ -5,8 +5,8 @@ import com.axelor.apps.admission.service.AdmissionProcessService;
 import com.axelor.apps.admission.service.AdmissionProcessServiceImpl;
 
 public class AdmissionModule extends AxelorModule {
-	@Override
-	protected void configure() {
-		bind(AdmissionProcessService.class).to(AdmissionProcessServiceImpl.class);
-	}
+  @Override
+  protected void configure() {
+    bind(AdmissionProcessService.class).to(AdmissionProcessServiceImpl.class);
+  }
 }

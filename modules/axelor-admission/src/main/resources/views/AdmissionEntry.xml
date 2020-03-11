@@ -2,83 +2,83 @@
 <object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://axelor.com/xml/ns/object-views
   http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
 
-	<grid model="com.axelor.apps.admission.db.AdmissionEntry" title="Admission Entries" name="admission-entry-grid">
-		<field name="candidate" />
-		<field name="registrationDate" />
-		<field name="faculty" />
-		<field name="merit" />
-		<field name="statusSelect" />
-		<field name="validationDate" />
-		<field name="collegeSelected" />
-	</grid>
+  <grid model="com.axelor.apps.admission.db.AdmissionEntry" title="Admission Entries" name="admission-entry-grid">
+    <field name="candidate" />
+    <field name="registrationDate" />
+    <field name="faculty" />
+    <field name="merit" />
+    <field name="statusSelect" />
+    <field name="validationDate" />
+    <field name="collegeSelected" />
+  </grid>
 
-	<form model="com.axelor.apps.admission.db.AdmissionEntry" title="Admission Entry Form" name="admission-entry-form" onNew="action-admission-attrs-admission-entry-set-initial-values" onLoad="action-admission-attrs-admission-entry-set-college-list-readonly">
-		<panel name="mainPanel">
-			<panel colSpan="7" stacked="true">
-				<field name="statusSelect" widget="NavSelect" showTitle="false" />
-			</panel>
-			<panel colSpan="12">
-				<field name="candidate" />
-				<field name="registrationDate" />
-				<field name="faculty" />
-				<field name="merit" />
-				<field name="collegeEntryList" colSpan="12" form-view="college-entry-form" grid-view="college-entry-grid"/>
-				<field name="validationDate" />
-				<field name="collegeSelected" />
-			</panel>
-		</panel>
-		<panel name="actionsPanel" sidebar="true">
-			<button name="confirmBtn" title="Confirm" showIf="statusSelect == 1" onClick="action-admission-group-confirm-onclick" />
-			<button name="admitBtn" title="Admit" showIf="statusSelect == 2" onClick="action-admission-group-admit-onclick" readonly="true" />
-			<button name="cancelBtn" title="Cancel" showIf="statusSelect == 2" onClick="action-admission-group-cancel-onclick" />
-			<button name="draftBtn" title="Draft" showIf="statusSelect == 4" onClick="action-admission-group-draft-onclick" />
-		</panel>
-	</form>
+  <form model="com.axelor.apps.admission.db.AdmissionEntry" title="Admission Entry Form" name="admission-entry-form" onNew="action-admission-attrs-admission-entry-set-initial-values" onLoad="action-admission-attrs-admission-entry-set-college-list-readonly">
+    <panel name="mainPanel">
+      <panel colSpan="7" stacked="true">
+        <field name="statusSelect" widget="NavSelect" showTitle="false" />
+      </panel>
+      <panel colSpan="12">
+        <field name="candidate" />
+        <field name="registrationDate" />
+        <field name="faculty" />
+        <field name="merit" />
+        <field name="collegeEntryList" colSpan="12" form-view="college-entry-form" grid-view="college-entry-grid"/>
+        <field name="validationDate" />
+        <field name="collegeSelected" />
+      </panel>
+    </panel>
+    <panel name="actionsPanel" sidebar="true">
+      <button name="confirmBtn" title="Confirm" showIf="statusSelect == 1" onClick="action-admission-group-confirm-onclick" />
+      <button name="admitBtn" title="Admit" showIf="statusSelect == 2" onClick="action-admission-group-admit-onclick" readonly="true" />
+      <button name="cancelBtn" title="Cancel" showIf="statusSelect == 2" onClick="action-admission-group-cancel-onclick" />
+      <button name="draftBtn" title="Draft" showIf="statusSelect == 4" onClick="action-admission-group-draft-onclick" />
+    </panel>
+  </form>
 
-	<action-group name="action-admission-group-confirm-onclick">
-		<action name="action-admission-record-confirm-onclick" />
-		<action name="save" />
-	</action-group>
+  <action-group name="action-admission-group-confirm-onclick">
+    <action name="action-admission-record-confirm-onclick" />
+    <action name="save" />
+  </action-group>
 
-	<action-group name="action-admission-group-admit-onclick">
-		<action name="action-admission-record-admit-onclick" />
-		<action name="save" />
-	</action-group>
+  <action-group name="action-admission-group-admit-onclick">
+    <action name="action-admission-record-admit-onclick" />
+    <action name="save" />
+  </action-group>
 
-	<action-group name="action-admission-group-cancel-onclick">
-		<action name="action-admission-record-cancel-onclick" />
-		<action name="save" />
-	</action-group>
+  <action-group name="action-admission-group-cancel-onclick">
+    <action name="action-admission-record-cancel-onclick" />
+    <action name="save" />
+  </action-group>
 
-	<action-group name="action-admission-group-draft-onclick">
-		<action name="action-admission-record-draft-onclick" />
-		<action name="save" />
-	</action-group>
+  <action-group name="action-admission-group-draft-onclick">
+    <action name="action-admission-record-draft-onclick" />
+    <action name="save" />
+  </action-group>
 
-	<action-record name="action-admission-record-confirm-onclick" model="com.axelor.apps.admission.db.AdmissionEntry">
-		<field name="statusSelect" expr="2" />
-	</action-record>
+  <action-record name="action-admission-record-confirm-onclick" model="com.axelor.apps.admission.db.AdmissionEntry">
+    <field name="statusSelect" expr="2" />
+  </action-record>
 
-	<action-record name="action-admission-record-admit-onclick" model="com.axelor.apps.admission.db.AdmissionEntry">
-		<field name="statusSelect" expr="3" />
-		<field name="validationDate" expr="eval: __date__" />
-	</action-record>
+  <action-record name="action-admission-record-admit-onclick" model="com.axelor.apps.admission.db.AdmissionEntry">
+    <field name="statusSelect" expr="3" />
+    <field name="validationDate" expr="eval: __date__" />
+  </action-record>
 
-	<action-record name="action-admission-record-cancel-onclick" model="com.axelor.apps.admission.db.AdmissionEntry">
-		<field name="statusSelect" expr="4" />
-	</action-record>
+  <action-record name="action-admission-record-cancel-onclick" model="com.axelor.apps.admission.db.AdmissionEntry">
+    <field name="statusSelect" expr="4" />
+  </action-record>
 
-	<action-record name="action-admission-record-draft-onclick" model="com.axelor.apps.admission.db.AdmissionEntry">
-		<field name="statusSelect" expr="1" />
-	</action-record>
+  <action-record name="action-admission-record-draft-onclick" model="com.axelor.apps.admission.db.AdmissionEntry">
+    <field name="statusSelect" expr="1" />
+  </action-record>
 
-	<action-attrs name="action-admission-attrs-admission-entry-set-initial-values">
-		<attribute name="value" for="registrationDate" expr="eval: __date__" />
-		<attribute name="value" for="statusSelect" expr="1" />
-	</action-attrs>
+  <action-attrs name="action-admission-attrs-admission-entry-set-initial-values">
+    <attribute name="value" for="registrationDate" expr="eval: __date__" />
+    <attribute name="value" for="statusSelect" expr="1" />
+  </action-attrs>
 
-	<action-attrs name="action-admission-attrs-admission-entry-set-college-list-readonly">
-		<attribute name="readonly" for="collegeList" expr="eval: (__self__.statusSelect == 1) ? false : true" />
-	</action-attrs>
+  <action-attrs name="action-admission-attrs-admission-entry-set-college-list-readonly">
+    <attribute name="readonly" for="collegeList" expr="eval: (__self__.statusSelect == 1) ? false : true" />
+  </action-attrs>
 
 </object-views>

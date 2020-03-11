@@ -2,15 +2,15 @@
 <object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://axelor.com/xml/ns/object-views
   http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
 
-	<grid model="com.axelor.apps.admission.db.College" title="College" name="college-grid">
-		<field name="name" />
-	</grid>
+  <grid model="com.axelor.apps.admission.db.College" title="College" name="college-grid">
+    <field name="name" />
+  </grid>
 
-	<form model="com.axelor.apps.admission.db.College" title="College" name="college-form">
-		<panel colSpan="12">
-			<field name="name" colSpan="12" />
-			<field name="facultyEntryList" colSpan="12" form-view="faculty-entry-form" grid-view="faculty-entry-grid" />
-		</panel>
-	</form>
+  <form model="com.axelor.apps.admission.db.College" title="College" name="college-form">
+    <panel colSpan="12">
+      <field name="name" colSpan="12" />
+      <field name="facultyEntryList" colSpan="12" form-view="faculty-entry-form" grid-view="faculty-entry-grid" />
+    </panel>
+  </form>
 
 </object-views>
